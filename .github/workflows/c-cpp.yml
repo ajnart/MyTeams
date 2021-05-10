@@ -1,0 +1,30 @@
+name: C/C++ Build and Test
+
+on: [push]
+
+jobs:
+  test:
+    container:
+      image: docker://srzzumix/googletest:latest
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: make tests_run
+    
+  buildcli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Make cli
+        run: make cli
+
+  buildserver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Make server
+        run: make server
