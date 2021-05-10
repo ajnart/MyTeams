@@ -24,16 +24,20 @@ endif
 all::	$(NAME)
 
 $(NAME):
-	@make -C server $(MAKECMDGOALS)
-	@make -C cli $(MAKECMDGOALS)
+	@make -C server
+	@make -C cli
 
 clean:
-	@make clean -C server $(MAKECMDGOALS)
-	@make clean -C cli $(MAKECMDGOALS)
+	@find . -name "*.o" -delete
+	@find . -name "*.gc*" -delete
+	@make clean -C server
+	@make clean -C cli
 
 fclean:
-	@make fclean -C server $(MAKECMDGOALS)
-	@make fclean -C cli $(MAKECMDGOALS)
+	@find . -name "myteams_*" -delete
+	@find . -name "tests_run" -delete
+	@make fclean -C server
+	@make fclean -C cli
 
 re::
 	@make clean -C server $(MAKECMDGOALS)
@@ -43,8 +47,8 @@ re::
 	@make -C cli $(MAKECMDGOALS)
 
 tests_run:
-	@make tests_run -C server $(MAKECMDGOALS)
-	@make tests_run -C cli $(MAKECMDGOALS)
+	@make -C server $(MAKECMDGOALS)
+	@make -C cli $(MAKECMDGOALS)
 
 debug:
 	@make debug -C server $(MAKECMDGOALS) 
