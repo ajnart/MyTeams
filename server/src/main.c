@@ -5,8 +5,8 @@
 ** main
 */
 
-#include "myteams/logging_client.h"
 #include "main.h"
+#include "myteams/logging_client.h"
 
 int main(int argc, char const *argv[])
 {
