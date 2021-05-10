@@ -39,20 +39,17 @@ fclean:
 	@make fclean -C server
 	@make fclean -C cli
 
-re::
-	@make clean -C server $(MAKECMDGOALS)
-	@make clean -C cli $(MAKECMDGOALS)
-re::
-	@make -C server $(MAKECMDGOALS)
-	@make -C cli $(MAKECMDGOALS)
+re:
+	@make re -C server
+	@make re -C cli
 
 tests_run:
 	@make -C server $(MAKECMDGOALS)
 	@make -C cli $(MAKECMDGOALS)
 
 debug:
-	@make debug -C server $(MAKECMDGOALS) 
-	@make debug -C cli $(MAKECMDGOALS)
+	@make debug -C server
+	@make debug -C cli
 
 cli:
 	@make -C cli

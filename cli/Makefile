@@ -63,9 +63,11 @@ tests_run:
 	@echo -e "\e[1m[INFO]\t\e[92mTests finished ✔\e[0m"
 
 clean:
+	@find . -name "*.o" -delete
 	@echo -e "\e[1m[C]\tClean $(NAME) OK\e[0m"
 
 fclean:	clean
+	@rm -rf myteams_cli
 	@echo -e "\e[1m[C]\tFClean $(NAME) OK\e[0m"
 
 re::	fclean
