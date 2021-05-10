@@ -1,5 +1,4 @@
 *.o
-myteams
 .vscode
 compile_commands.json
 .cache
