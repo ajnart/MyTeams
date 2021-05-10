@@ -40,6 +40,8 @@ fclean:
 	@make fclean -C cli
 
 re:
+	@find . -name "myteams_*" -delete
+	@find . -name "tests_run" -delete
 	@make re -C server
 	@make re -C cli
 
