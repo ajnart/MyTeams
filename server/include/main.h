@@ -5,8 +5,12 @@
 ** main
 */
 
-int main(int argc, char const *argv[])
+#ifndef MAIN_H_
+#define MAIN_H_
+
+void stop(void)
 {
-    /* code */
-    return 0;
+    
 }
+
+#endif /* !MAIN_H_ */
