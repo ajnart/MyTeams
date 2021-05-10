@@ -1,0 +1,84 @@
+---
+BasedOnStyle: LLVM
+AccessModifierOffset: "-4"
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: "true"
+AlignConsecutiveAssignments: "true"
+AlignConsecutiveDeclarations: "false"
+AlignEscapedNewlines: Left
+AlignTrailingComments: "true"
+AllowAllArgumentsOnNextLine: "true"
+AllowAllConstructorInitializersOnNextLine: "true"
+AllowAllParametersOfDeclarationOnNextLine: "true"
+AllowShortBlocksOnASingleLine: "true"
+AllowShortCaseLabelsOnASingleLine: "true"
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: "true"
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: "Yes"
+BinPackArguments: "true"
+BinPackParameters: "true"
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterCaseLabel: false
+    AfterControlStatement: false
+    AfterEnum: false
+    AfterFunction: true
+    AfterNamespace: true
+    AfterStruct: false
+    AfterUnion: false
+    AfterExternBlock: true
+    BeforeCatch: false
+    BeforeElse: false
+    IndentBraces: false
+    SplitEmptyFunction: true
+    SplitEmptyRecord: true
+    SplitEmptyNamespace: true
+
+ColumnLimit: "120"
+IncludeBlocks: Merge
+IndentCaseLabels: "true"
+IndentPPDirectives: AfterHash
+IndentWidth: "4"
+Language: Cpp
+NamespaceIndentation: All
+ObjCBlockIndentWidth: "4"
+PenaltyReturnTypeOnItsOwnLine: "0"
+PointerAlignment: Right
+ReflowComments: "false"
+SortIncludes: "true"
+SortUsingDeclarations: "true"
+SpaceAfterCStyleCast: "false"
+SpaceAfterLogicalNot: "false"
+SpaceAfterTemplateKeyword: "true"
+SpaceBeforeAssignmentOperators: "true"
+SpaceBeforeCpp11BracedList: "true"
+SpaceBeforeCtorInitializerColon: "false"
+SpaceBeforeInheritanceColon: "false"
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: "true"
+SpaceInEmptyParentheses: "false"
+SpacesBeforeTrailingComments: "4"
+SpacesInAngles: "false"
+SpacesInCStyleCastParentheses: "false"
+SpacesInContainerLiterals: "false"
+SpacesInParentheses: "false"
+SpacesInSquareBrackets: "false"
+Standard: Latest
+TabWidth: "4"
+UseTab: Never
+SortIncludes: true
+IncludeBlocks: Preserve
+IncludeCategories:
+IncludeCategories:
+  - Regex:           '^"[[:alnum:]./]+"'       # Any "my_header.h"
+    Priority:        3
+  - Regex:           '<criterion/[a-z]+\.h>'  # Criterion headers
+    Priority:        2
+  - Regex:           '<[[:alnum:]./]+>'        # System/Standard libs
+    Priority:        1
+
+SortUsingDeclarations: true

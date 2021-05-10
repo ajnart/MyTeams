@@ -1,0 +1,13 @@
+# -*- mode: yaml; -*-
+---
+# enable all checks, but then blacklist as needed
+# https://clang.llvm.org/extra/clang-tidy/checks/list.html
+Checks: "*,
+-*readability-braces-around-statements,
+-google-readability-todo,
+-llvm-header-guard,
+-fuchsia*,
+-llvmlibc*,
+-*magic-numbers*,
+-*braces-around-statements,
+"
