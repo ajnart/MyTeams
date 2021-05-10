@@ -50,4 +50,9 @@ debug:
 	@make debug -C server $(MAKECMDGOALS) 
 	@make debug -C cli $(MAKECMDGOALS)
 
+cli:
+	@make -C cli
+server:
+	@make -C server
+
 .PHONY: tests_run re fclean clean all message debug cli server
