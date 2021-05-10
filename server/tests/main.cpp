@@ -7,4 +7,4 @@
 
 #include <gtest/gtest.h>
 
-TEST {Main, Nothing} { ASSERT(0, 0); }
+TEST(Main, dummy) { ASSERT_EQ(0, 0); }
