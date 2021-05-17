@@ -20,7 +20,7 @@ struct connection parse_args(char **argv)
     ret.port = strtol(argv[2], &argv[2], 10);
 #ifdef __DEBUG
     printf("[D] IP:%s\n", ret.ip);
-    printf("[D] Port: %ld", ret.port);
+    printf("[D] Port: %ld\n", ret.port);
 #endif
     return (ret);
 }

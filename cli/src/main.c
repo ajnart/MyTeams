@@ -22,11 +22,14 @@ int printhelp()
 
 int checkargs(int argc, char **argv)
 {
+    struct connection c;
     if (argc == 2 && strcmp(argv[1], "-help") == 0)
         return printhelp();
     if (argc != 3)
         return (ERROR);
-    parse_args(argv);
+    c = parse_args(argv);
+    if (tryconnect(c) == ERROR)
+        return (ERROR);
     return (OK);
 }
 
