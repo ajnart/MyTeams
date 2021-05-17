@@ -49,7 +49,7 @@ else
 endif
 
 $(NAME):
-	$(CC) -o $(NAME) $(CFLAGS) $(SRC)
+	$(CC) -o $(NAME) $(CFLAGS) -O3 $(SRC)
 	@cp $(NAME) ../
 
 debug:: clean

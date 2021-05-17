@@ -49,7 +49,7 @@ else
 endif
 
 $(NAME):
-	$(CC) -o $(NAME) $(CFLAGS) $(SRC)
+	$(CC) -o $(NAME) -O3 $(CFLAGS) $(SRC)
 	@cp $(NAME) ../
 
 debug:: clean
@@ -57,7 +57,7 @@ debug:: all
 debug:: message
 
 tests_run:
-	$(CXX) -o tests_run $(SRC) $(TEST_SRC) -Iinclude $(TESTSFLAGS)
+	$(CXX) -o tests_run $(SRC) $(TEST_SRC) $(CFLAGS) $(TESTSFLAGS)
 	@./tests_run
 	@gcovr --exclude tests; echo -e "gcovr not found"
 	@echo -e "\e[1m[INFO]\t\e[92mTests finished ✔\e[0m"
