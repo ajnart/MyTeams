@@ -14,7 +14,7 @@ TEST_SRC	= 	$(shell find $(TEST_DIR) -name "*.cpp")
 
 SRC			=	$(shell find $(SOURCE_DIR) -name "*.c" -not -path "./$(TEST_DIR)/*")
 
-CFLAGS		=	-Wall -Wextra -Iinclude -Wimplicit-fallthrough=0
+CFLAGS		=	-Wall -Wextra -Iinclude -I../libs/myteams -L../libs/myteams/ -Wimplicit-fallthrough=0
 
 TEST_DIR	= 	tests
 
