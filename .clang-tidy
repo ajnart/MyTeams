@@ -8,6 +8,6 @@ Checks: "*,
 -llvm-header-guard,
 -fuchsia*,
 -llvmlibc*,
--*magic-numbers*,
+-llvm-include-order,
 -*braces-around-statements,
 "
