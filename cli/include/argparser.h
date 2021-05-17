@@ -9,11 +9,11 @@
 #define ARGUMENTAPRSER_H_
 
 struct connection {
-    const char *ip;
-    unsigned int port;
+    char *ip;
+    long port;
 } __attribute__((aligned(16)));
 
-int checkargs(int argc, const char **argv);
-struct connection parse_args(const char **);
+int checkargs(int argc, char **argv);
+struct connection parse_args(char **);
 
 #endif /* !ARGUMENTAPRSER_H_ */

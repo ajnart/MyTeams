@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "definitions.h"
+#include "argparser.h"
 #include "logging_client.h"
 
 int printhelp()
@@ -19,7 +20,7 @@ int printhelp()
     return OK;
 }
 
-int checkargs(int argc, const char **argv)
+int checkargs(int argc, char **argv)
 {
     if (argc == 2 && strcmp(argv[1], "-help") == 0)
         return printhelp();
@@ -29,7 +30,7 @@ int checkargs(int argc, const char **argv)
     return (OK);
 }
 
-int cli(int argc, const char **argv)
+int cli(int argc, char **argv)
 {
     if (checkargs(argc, argv) == ERROR)
         return (ERROR);
@@ -38,7 +39,7 @@ int cli(int argc, const char **argv)
 
 #ifndef __TESTS
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
     return (cli(argc, argv));
 }
