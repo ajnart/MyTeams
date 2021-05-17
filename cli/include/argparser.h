@@ -9,8 +9,7 @@
 #define ARGUMENTAPRSER_H_
 
 struct connection {
-    unsigned int errno;
-    char *ip;
+    const char *ip;
     unsigned int port;
 } __attribute__((aligned(16)));
 

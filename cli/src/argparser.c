@@ -8,6 +8,7 @@
 #include "argparser.h"
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "definitions.h"
 
 // 192.169.0.0.1
@@ -15,11 +16,11 @@
 //TODO: Finish this. Catch args and allocate memory accordingly
 struct connection parse_args(const char **argv)
 {
-    struct connection ret = {.errno = 0};
-    if (strlen(argv[1]) < 9)
-        ret.errno = ERROR;
-    return (ret);
-    ret.ip = malloc(1 * strlen(argv[1]));
-    ret.errno = 1;
+    struct connection ret;
+    ret.ip = argv[1];
+    ret.port = strtol(argv[2], NULL , 10);
+    #ifdef __DEBUG
+    printf("[D]\tIP:%s\tPort:%d\n", ret.port);
+    #endif
     return (ret);
 }
