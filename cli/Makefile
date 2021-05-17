@@ -57,12 +57,13 @@ debug:: all
 debug:: message
 
 tests_run:
-	$(CXX) -o tests_run $(SRC) $(TEST_SRC) -Iinclude $(TESTSFLAGS)
+	$(CXX) -o tests_run $(SRC) $(TEST_SRC) $(CFLAGS) $(TESTSFLAGS)
 	@./tests_run
 	@gcovr --exclude tests; echo -e "gcovr not found"
 	@echo -e "\e[1m[INFO]\t\e[92mTests finished ✔\e[0m"
 
 clean:
+	@find . -name "*.*gc*" -delete
 	@find . -name "*.o" -delete
 	@echo -e "\e[1m[C]\tClean $(NAME) OK\e[0m"
 
