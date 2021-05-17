@@ -11,7 +11,7 @@
 TEST(Main, helptest)
 {
     int argc = 2;
-    const char *argv[] = {(char *) "myteams_cli", (char *)"help"};
+    char *argv[] = {(char *) "myteams_cli", (char *)"-help"};
     ASSERT_EQ(checkargs(argc, argv), 0);
 }
 
