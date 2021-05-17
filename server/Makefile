@@ -24,7 +24,7 @@ TESTSFLAGS = -lgtest -lgtest_main -lpthread --coverage -D__TESTS
 
 ifneq (,$(findstring debug,$(MAKECMDGOALS)))
 	DEBUG = 1
-	CFLAGS += -g3 -D DEBUG
+	CFLAGS += -g3 -D __DEBUG
 endif
 
 OBJ		=	$(SRC:.c=.o)
