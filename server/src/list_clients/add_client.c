@@ -13,6 +13,7 @@ void add_client(list_t **list, int fd)
     list_t *tmp = *list;
 
     new->next = NULL;
+    new->is_authenticated = false;
     new->sockfd = fd;
     if (!*list) {
         new->prev = NULL;

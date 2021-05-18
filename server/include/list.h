@@ -11,6 +11,7 @@
 typedef struct list
 {
     int sockfd;
+    bool is_authenticated;
     struct list *next;
     struct list *prev;
 } list_t;

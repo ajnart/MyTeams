@@ -17,6 +17,7 @@ bool cmd(info_t *info, int fd)
         delete_client(&info->list, fd, &info->__readfds);
         --info->curr_co;
     }
+    printf("socket number #%d said: %s\n", fd, info->buff);
     free(info->buff);
     return true;
 }

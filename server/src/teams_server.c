@@ -30,6 +30,7 @@ info_t *start(info_t *info)
         close(info->serv_sock);
         return NULL;
     }
+    printf("-> %d\n", info->port);
     FD_ZERO(&info->__readfds);
     FD_SET(info->serv_sock, &info->__readfds);
     return info;
