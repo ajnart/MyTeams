@@ -14,13 +14,13 @@ TEST_SRC	= 	$(shell find $(TEST_DIR) -name "*.cpp")
 
 SRC			=	$(shell find $(SOURCE_DIR) -name "*.c" -not -path "./$(TEST_DIR)/*")
 
-CFLAGS		=	-Wall -Wextra -Iinclude -I../libs/myteams -L../libs/myteams/ -Wimplicit-fallthrough=0
+CFLAGS		=	-Wall -Wextra -Iinclude -I../libs/myteams -Wimplicit-fallthrough=0
 
 TEST_DIR	= 	tests
 
 TEST_SRC	= 	$(shell find $(TEST_DIR) -name "*.cpp")
 
-TESTSFLAGS = -lgtest -lgtest_main -lpthread --coverage -D__TESTS
+TESTSFLAGS 	= 	-lgtest -lgtest_main -lpthread --coverage -D__TESTS
 
 ifneq (,$(findstring debug,$(MAKECMDGOALS)))
 	DEBUG = 1

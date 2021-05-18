@@ -6,11 +6,10 @@
 */
 
 #include "main.h"
-#include "logging_client.h"
+#include "logging_server.h"
 
 int main(int argc, char const *argv[])
 {
     stop();
-    client_event_logged_in("hello", "world");
     return 0;
 }
