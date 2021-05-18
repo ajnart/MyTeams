@@ -6,10 +6,13 @@
 */
 
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "commands.h"
 #include "definitions.h"
+
+// TODO: Add all functions corresponding to commands here
+const int (*pf[])(connection_t *connection) = {help, login, logout};
 
 int run(connection_t *connection)
 {
@@ -22,14 +25,13 @@ int run(connection_t *connection)
         return (ERROR);
     }
     while (getline(&line, &block, stdin)) {
-#ifdef __DEBUG
-        printf("[D] You entered: %s\n", line);
-#endif
         enum commands command = NONE;
         command = getcommand(line);
-        switch (command) {
-            case HELP: help();
-            default: break;
+#ifdef __DEBUG
+        printf("[D] You entered: %s\nLaunching command: %d\n", line, command);
+#endif
+        if (command != NONE) {
+            pf[command](connection);
         }
     }
     close(connection->socket_fd); // Close socket connection.

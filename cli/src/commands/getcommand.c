@@ -26,7 +26,7 @@ enum commands getcommand(char *line)
     for (unsigned long i = 0; i < sizeof(commands)/8; i++)
     {
         if (strcmp(cmd+1, commands[i]) == 0)
-            result = i+1;// I is set to the index of the command needed
+            result = i;// I is set to the index of the command needed
     }
     return result; // If nothing is found it will return NONE
 }

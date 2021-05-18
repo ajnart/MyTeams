@@ -19,7 +19,7 @@
 // Enum containing all the valid commands. To be used in the runner.
 enum commands
 {
-    NONE,
+    NONE = -1,
     HELP,
     LOGIN,
     LOGOUT,
