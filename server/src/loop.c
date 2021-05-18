@@ -27,9 +27,8 @@ bool get_client(info_t *info)
     socklen_t addr_len = sizeof(info->cli_addr);
 
     if ((info->cli_sock = accept(info->serv_sock, SOCK &info->cli_addr,
-    &addr_len)) == -1) {
+    &addr_len)) == -1)
         return false;
-    }
     add_client(&info->list, info->cli_sock);
     ++info->curr_co;
     FD_SET(info->cli_sock, &info->__readfds);

@@ -15,9 +15,9 @@ char *get_next_line(int fd)
 
     if (!buf || read(fd, &current, 1) <= 0)
         return NULL;
-    if (!index && current == '\n') {
+    if (!index && current == '\n')
         current = -1;
-    } buf[index] = current;
+    buf[index] = current;
     buf = realloc(buf, ++index + 1);
     while (current && current != '\n') {
         if (!buf || read(fd, &current, 1) <= 0)
