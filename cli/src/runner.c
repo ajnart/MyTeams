@@ -12,7 +12,7 @@
 #include "definitions.h"
 
 // TODO: Add all functions corresponding to commands here
-const int (*pf[])(connection_t *connection) = {help, login, logout};
+int (*pf[])(connection_t *connection) = {help, login, logout};
 
 int run(connection_t *connection)
 {
