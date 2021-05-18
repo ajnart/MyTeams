@@ -22,7 +22,7 @@ enum commands getcommand(char *line)
 
     if (line == NULL || line[0] != '/')
         return result;
-    const char *cmd = strtok_r(line, " ", &rest);
+    const char *cmd = strtok_r(line, " \n", &rest);
     for (unsigned long i = 0; i < sizeof(commands)/8; i++)
     {
         printf("compare %s with %s\n", cmd+1, commands[i]);
