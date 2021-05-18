@@ -25,10 +25,8 @@ enum commands getcommand(char *line)
     const char *cmd = strtok_r(line, " \n", &rest);
     for (unsigned long i = 0; i < sizeof(commands)/8; i++)
     {
-        printf("compare %s with %s\n", cmd+1, commands[i]);
         if (strcmp(cmd+1, commands[i]) == 0)
             result = i+1;// I is set to the index of the command needed
     }
-    printf("result: %u", result);
     return result; // If nothing is found it will return NONE
 }
