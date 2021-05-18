@@ -18,6 +18,6 @@ struct connection {
 
 int checkargs(int argc, char **argv);
 struct connection parse_args(char **);
-int tryconnect(struct connection c, connection_t connection);
+int tryconnect(struct connection c, connection_t *connection);
 
 #endif /* !ARGUMENTAPRSER_H_ */
