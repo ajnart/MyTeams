@@ -1,16 +1,22 @@
 /*
 ** EPITECH PROJECT, 2021
-** MyTeams [SSH: elitebook]
+** B-NWP-400-BDX-4-1-myteams-thomas.camlong
 ** File description:
 ** main
 */
 
-#include "main.h"
-#include "logging_client.h"
+#include "teams_server.h"
+#include "maccro.h"
 
-int main(int argc, char const *argv[])
+int usage()
 {
-    stop();
-    client_event_logged_in("hello", "world");
-    return 0;
+    printf(USAGE);
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char **argv)
+{
+    return (argc != 3) ?
+    (!strcmp(argv[1], HELP)) ? usage() : 84
+    : teams_server(atoi(argv[1]));
 }
