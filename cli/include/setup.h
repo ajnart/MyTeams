@@ -2,13 +2,13 @@
 ** EPITECH PROJECT, 2021
 ** MyTeams
 ** File description:
-** argumentaprser
+** setup
 */
 
 #ifndef ARGUMENTAPRSER_H_
 #define ARGUMENTAPRSER_H_
 
-#include "connection.h"
+#include "definitions.h"
 
 struct connection {
     char *ip;

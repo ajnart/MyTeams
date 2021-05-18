@@ -5,11 +5,9 @@
 ** connect
 */
 
-
 #include <stdio.h>
-#include "connection.h"
-#include "argparser.h"
 #include "definitions.h"
+#include "setup.h"
 
 int tryconnect(struct connection c, connection_t *connection)
 {
@@ -26,8 +24,8 @@ int tryconnect(struct connection c, connection_t *connection)
     connection->server.sin_port = htons(c.port);
 
     // Connect to remote server
-    if (connect(connection->socket_fd,
-            (struct sockaddr *) &connection->server, sizeof(connection->server))
+    if (connect(connection->socket_fd, (struct sockaddr *) &connection->server,
+            sizeof(connection->server))
         < 0) {
         printf("[E] Could not connect to server.\n");
         return (ERROR);

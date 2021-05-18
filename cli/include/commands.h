@@ -8,6 +8,9 @@
 #ifndef COMMANDS_H_
 #define COMMANDS_H_
 
-void print();
+// Gets the command, if any, contained in line. 
+enum commands getcommand(char *line);
+// Prints the big help message
+void help(void);
 
 #endif /* !COMMANDS_H_ */

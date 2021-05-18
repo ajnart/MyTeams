@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include "commands.h"
 
-void help()
+void help(void)
 {
     printf(
         "•\t/help : show help\n"

@@ -5,14 +5,14 @@
 ** argparser
 */
 
-#include "argparser.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "definitions.h"
+#include "setup.h"
 
-//TODO: Finish this. Catch args and allocate memory accordingly
+// TODO: Finish this. Catch args and allocate memory accordingly
 struct connection parse_args(char **argv)
 {
     struct connection ret;

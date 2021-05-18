@@ -8,8 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "argparser.h"
 #include "definitions.h"
+#include "setup.h"
+#include "runner.h"
 #include "logging_client.h"
 
 int printhelp()
@@ -24,13 +25,15 @@ int printhelp()
 int checkargs(int argc, char **argv)
 {
     struct connection c;
-    connection_t *conn = malloc(sizeof(connection_t));
+    connection_t *connection = malloc(sizeof(connection_t));
     if (argc == 2 && strcmp(argv[1], "-help") == 0)
         return printhelp();
     if (argc != 3)
         return (ERROR);
     c = parse_args(argv);
-    if (tryconnect(c, conn) == ERROR)
+    if (tryconnect(c, connection) == ERROR)
+        return (ERROR);
+    if (run(connection) == ERROR)
         return (ERROR);
     return (OK);
 }
