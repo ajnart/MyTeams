@@ -14,15 +14,15 @@
 
 // Todo : Add all the commands to the commands[] array.
 // Note: No need to updated the for loop becuase sizeof(char *) = 8 so it knows when to stop looping
-enum commands getcommand(char *line)
+enum commands getcommand(const char *line)
 {
     enum commands result = NONE;
     const char *commands[] = {"help", "login", "logout"};
-    char *rest = line;
+    char *rest = strdup(line);
 
     if (line == NULL || line[0] != '/')
         return result;
-    const char *cmd = strtok_r(line, " \n", &rest);
+    const char *cmd = strtok_r(rest, " \n", &rest);
     for (unsigned long i = 0; i < sizeof(commands)/8; i++)
     {
         if (strcmp(cmd+1, commands[i]) == 0)
