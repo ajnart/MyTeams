@@ -12,7 +12,7 @@
 #include "definitions.h"
 
 // TODO: Add all functions corresponding to commands here
-int (*pf[])(connection_t *connection) = {help, login, logout};
+int (*pf[])(connection_t *connection, char *line) = {help, login, logout};
 
 int run(connection_t *connection)
 {
@@ -31,7 +31,7 @@ int run(connection_t *connection)
         printf("[D] You entered: %s\nLaunching command: %d\n", line, command);
 #endif
         if (command != NONE) {
-            pf[command](connection);
+            pf[command](connection, line);
         }
     }
     close(connection->socket_fd); // Close socket connection.
