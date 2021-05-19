@@ -5,7 +5,7 @@ on: [push]
 jobs:
   test:
     container:
-      image: docker://srzzumix/googletest:latest
+      image: epitechcontent/epitest-docker/
     runs-on: ubuntu-latest
     continue-on-error: true
 
