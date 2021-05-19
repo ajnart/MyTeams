@@ -11,12 +11,12 @@
 #include "definitions.h"
 
 // Gets the command, if any, contained in line.
-enum commands getcommand(char *line);
+enum commands getcommand(const char *line);
 // Prints the big help message
-int help(connection_t __attribute__((unused)) *connection);
+int help(connection_t __attribute__((unused)) * connection, char *str);
 // login command
-int login(connection_t *command);
+int login(connection_t *command, char *str);
 // Logout
-int logout(connection_t *command);
+int logout(connection_t *command, char *str);
 
 #endif /* !COMMANDS_H_ */
