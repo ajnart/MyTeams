@@ -2,20 +2,22 @@
 ** EPITECH PROJECT, 2021
 ** MyTeams
 ** File description:
-** argumentaprser
+** setup
 */
 
 #ifndef ARGUMENTAPRSER_H_
 #define ARGUMENTAPRSER_H_
 
+#include "definitions.h"
+
 struct connection {
     char *ip;
     long port;
 
-} __attribute__((aligned(16)));
+};
 
 int checkargs(int argc, char **argv);
 struct connection parse_args(char **);
-int tryconnect(struct connection c);
+int tryconnect(struct connection c, connection_t *connection);
 
 #endif /* !ARGUMENTAPRSER_H_ */
