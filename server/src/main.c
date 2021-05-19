@@ -13,6 +13,8 @@ int usage()
     return EXIT_SUCCESS;
 }
 
+#ifndef __TESTS
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -21,3 +23,5 @@ int main(int argc, char **argv)
         return usage();
     return teams_server(atoi(argv[1]));
 }
+
+#endif

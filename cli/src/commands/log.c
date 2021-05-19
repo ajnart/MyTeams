@@ -5,9 +5,14 @@
 ** login
 */
 
-#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+#include <uuid/uuid.h>
+/* For puts()/printf() */
+#include <stdio.h>
+/* For uuid_generate() and uuid_unparse() */
 #include <uuid/uuid.h>
 #include "definitions.h"
 #include "logging_client.h"
