@@ -10,14 +10,13 @@
 
 bool cmd(info_t *info, int fd)
 {
-    size_t len = 0;
-
     info->buff = get_next_line(fd);
     if (info->buff == NULL) {
         delete_client(&info->list, fd, &info->__readfds);
         --info->curr_co;
     }
     printf("socket number #%d said: %s\n", fd, info->buff);
+    teams_cmd(info, fd);
     free(info->buff);
     return true;
 }
@@ -59,4 +58,6 @@ int loop(info_t *info)
         if (!loop_fd(info))
             return 84;
     }
+    close(info->serv_sock);
+    return 0;
 }

@@ -16,7 +16,9 @@ int usage()
 
 int main(int argc, char **argv)
 {
-    return (argc != 2) ?
-    (!strcmp(argv[1], HELP)) ? usage() : 84
-    : teams_server(atoi(argv[1]));
+    if (argc != 2)
+        return 84;
+    if (!strcmp(argv[1], HELP))
+        return usage();
+    return teams_server(atoi(argv[1]));
 }

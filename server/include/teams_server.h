@@ -32,11 +32,15 @@ typedef struct info
     int curr_co;
     fd_set __readfds;
     char *buff;
+    char **array;
     list_t *list;
 } info_t;
 
 int teams_server(int port);
 int loop(info_t *info);
+void teams_cmd(info_t *info, int fd);
+
 char *get_next_line(int fd);
+char **str_to_word_array(char *str, char *delim);
 
 #endif /* !TEAMS_SERVER_H_ */
