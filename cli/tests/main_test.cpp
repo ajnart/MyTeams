@@ -6,7 +6,7 @@
 */
 
 #include <gtest/gtest.h>
-#include "argparser.h"
+#include "setup.h"
 
 TEST(Main, helptest)
 {

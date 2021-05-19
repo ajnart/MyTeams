@@ -14,13 +14,13 @@ TEST_SRC	= 	$(shell find $(TEST_DIR) -name "*.cpp")
 
 SRC			=	$(shell find $(SOURCE_DIR) -name "*.c" -not -path "./$(TEST_DIR)/*")
 
-CFLAGS		=	-Wall -Wextra -Iinclude -I../libs/myteams -L../libs/myteams -lmyteams -Wimplicit-fallthrough=0
+CFLAGS		=	-Wall -Wextra -Iinclude -I../libs/myteams -Wimplicit-fallthrough=0
 
 TEST_DIR	= 	tests
 
 TEST_SRC	= 	$(shell find $(TEST_DIR) -name "*.cpp")
 
-TESTSFLAGS = -lgtest -lgtest_main -lpthread --coverage -D__TESTS
+TESTSFLAGS 	= 	-lgtest -lgtest_main -lpthread --coverage -D__TESTS
 
 ifneq (,$(findstring debug,$(MAKECMDGOALS)))
 	DEBUG = 1
@@ -49,7 +49,7 @@ else
 endif
 
 $(NAME):
-	$(CC) -o $(NAME) -O3 $(CFLAGS) $(SRC)
+	$(CC) -o $(NAME) $(CFLAGS) -O3 $(SRC)
 	@cp $(NAME) ../
 
 debug:: clean
@@ -63,11 +63,12 @@ tests_run:
 	@echo -e "\e[1m[INFO]\t\e[92mTests finished ✔\e[0m"
 
 clean:
+	@find . -name "*.*gc*" -delete
 	@find . -name "*.o" -delete
 	@echo -e "\e[1m[C]\tClean $(NAME) OK\e[0m"
 
 fclean:	clean
-	@rm -rf myteams_server
+	@rm -rf $(NAME)
 	@echo -e "\e[1m[C]\tFClean $(NAME) OK\e[0m"
 
 re::	fclean
