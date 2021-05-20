@@ -14,6 +14,7 @@ void add_client(list_t **list, int fd)
 
     create->next = NULL;
     create->is_authenticated = false;
+    create->login = NULL;
     create->sockfd = fd;
     if (!*list) {
         create->prev = NULL;

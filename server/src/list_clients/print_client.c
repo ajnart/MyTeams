@@ -13,7 +13,7 @@ void print_client(list_t *list)
     list_t *tmp = list;
 
     while (tmp) {
-        printf("fd -> %d | ", tmp->sockfd);
+        printf("fd -> %d\n", tmp->sockfd);
         tmp = tmp->next;
     }
 }

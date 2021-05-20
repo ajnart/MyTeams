@@ -41,7 +41,7 @@ bool line_connect(int fd, info_t *info)
     return (info->serv_sock == fd) ? get_client(info) : cmd(info, fd);
 }
 
-int loop_fd(info_t *info)
+bool loop_fd(info_t *info)
 {
     for (int i = 0; i < FD_SETSIZE; ++i) {
         if (FD_ISSET(i, &info->afds) && !line_connect(i, info))
