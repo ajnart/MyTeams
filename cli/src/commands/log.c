@@ -10,7 +10,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "definitions.h"
-#include "logging_client.h"
+#include "myteams/logging_client.h"
 
 // Strtok_r is used two times to catch the username used to log-in.
 int login(connection_t *connection, char *str)

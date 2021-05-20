@@ -11,7 +11,7 @@
 #include "definitions.h"
 #include "setup.h"
 #include "runner.h"
-#include "logging_client.h"
+#include "myteams/logging_client.h"
 
 int printhelp()
 {

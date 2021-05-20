@@ -27,6 +27,7 @@ int run(connection_t *connection)
     while (getline(&line, &block, stdin)) {
         enum commands command = NONE;
         command = getcommand(line);
+
 #ifdef __DEBUG
         printf("[D] You entered: %s\nLaunching command: %d\n", line, command);
 #endif

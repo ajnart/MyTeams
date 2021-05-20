@@ -33,7 +33,6 @@ typedef struct {
     struct sockaddr_in server;
     bool connected;
     uuid_t uuid;
-
-} __attribute__((aligned(32))) connection_t;
+} __attribute__((aligned(64))) connection_t;
 
 #endif /* !DEFINITIONS_H_ */
