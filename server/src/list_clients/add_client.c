@@ -19,9 +19,9 @@ void add_client(list_t **list, int fd)
     if (!*list) {
         create->prev = NULL;
         *list = create;
-    }
-    else {
-        while (tmp->next) tmp = tmp->next;
+    } else {
+        while (tmp->next)
+            tmp = tmp->next;
         tmp->next = create;
         create->prev = tmp;
     }

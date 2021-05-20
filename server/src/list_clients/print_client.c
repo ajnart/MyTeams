@@ -5,8 +5,8 @@
 ** print_client
 */
 
-#include "list.h"
 #include <stdio.h>
+#include "list.h"
 
 void print_client(list_t *list)
 {

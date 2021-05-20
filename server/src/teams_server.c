@@ -22,11 +22,11 @@ struct sockaddr_in *assign(info_t *info)
 info_t *start(info_t *info)
 {
     struct sockaddr_in *addr;
-    if ((info->serv_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1 ||
-    (addr = assign(info)) == NULL || !info)
+    if ((info->serv_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1
+        || (addr = assign(info)) == NULL || !info)
         return NULL;
     if (((bind(info->serv_sock, SOCK addr, sizeof(*addr))) == -1)
-    || (listen(info->serv_sock, 5) == -1)) {
+        || (listen(info->serv_sock, 5) == -1)) {
         close(info->serv_sock);
         return NULL;
     }

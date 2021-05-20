@@ -6,8 +6,8 @@
 */
 
 #include <sys/socket.h>
-#include "maccro.h"
 #include "definitions.h"
+#include "maccro.h"
 #include "teams_server.h"
 
 bool cmd(info_t *info, int fd)
@@ -27,8 +27,9 @@ bool get_client(info_t *info)
 {
     socklen_t addr_len = sizeof(info->cli_addr);
 
-    if ((info->cli_sock = accept(info->serv_sock, SOCK &info->cli_addr,
-    &addr_len)) == -1)
+    if ((info->cli_sock =
+                accept(info->serv_sock, SOCK & info->cli_addr, &addr_len))
+        == -1)
         return false;
     printf("New client connected on socket: %d\n", info->cli_sock);
     add_client(&info->list, info->cli_sock);

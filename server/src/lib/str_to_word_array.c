@@ -13,7 +13,7 @@ char **str_to_word_array(char *str, char *delim)
     int i = 0;
     char **array = malloc(sizeof(char *) * i);
 
-    while(ptr != NULL) {
+    while (ptr != NULL) {
         array[i] = strdup(ptr);
         ptr = strtok(NULL, delim);
         i++;

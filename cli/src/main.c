@@ -9,8 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "definitions.h"
-#include "setup.h"
 #include "runner.h"
+#include "setup.h"
 #include "myteams/logging_client.h"
 
 int printhelp()
@@ -25,7 +25,7 @@ int printhelp()
 int checkargs(int argc, char **argv)
 {
     struct connection c;
-    connection_t *connection = (connection_t *)malloc(sizeof(connection_t));
+    connection_t *connection = (connection_t *) malloc(sizeof(connection_t));
     if (argc == 2 && strcmp(argv[1], "-help") == 0)
         return printhelp();
     if (argc != 3)

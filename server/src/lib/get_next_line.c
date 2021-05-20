@@ -25,8 +25,10 @@ char *get_next_line(int fd)
         if (!index && current == '\n') {
             current = -1;
             continue;
-        } buf[index] = current;
+        }
+        buf[index] = current;
         buf = realloc(buf, ++index + 1);
-    } buf[index] = 0;
+    }
+    buf[index] = 0;
     return (!current ? NULL : buf);
 }

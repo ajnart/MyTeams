@@ -13,7 +13,8 @@ void delete_client(list_t **list, int fd, fd_set *_readfds)
 
     close(fd);
     FD_CLR(fd, _readfds);
-    while (tmp != NULL && tmp->sockfd != fd) tmp = tmp->next;
+    while (tmp != NULL && tmp->sockfd != fd)
+        tmp = tmp->next;
     if (*list == NULL || tmp == NULL)
         return;
     if (*list == tmp)

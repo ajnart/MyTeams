@@ -9,11 +9,10 @@
 #define LIST_H_
 
 #include <stdbool.h>
-#include <sys/socket.h>
 #include <sys/select.h>
+#include <sys/socket.h>
 
-typedef struct list
-{
+typedef struct list {
     int sockfd;
     bool is_authenticated;
     char *login;
@@ -25,6 +24,5 @@ void add_client(list_t **list, int fd);
 void delete_client(list_t **list, int fd, fd_set *__readfds);
 list_t *get_current_client(list_t **list, int fd);
 void print_client(list_t *list);
-
 
 #endif /* !LIST_H_ */

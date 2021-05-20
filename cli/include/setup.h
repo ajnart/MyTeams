@@ -13,7 +13,6 @@
 struct connection {
     char *ip;
     long port;
-
 };
 
 int checkargs(int argc, char **argv);

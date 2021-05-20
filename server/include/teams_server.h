@@ -5,24 +5,21 @@
 ** teams_server
 */
 
-
 #ifndef TEAMS_SERVER_H_
 #define TEAMS_SERVER_H_
 
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <unistd.h>
 #include "list.h"
 
-typedef struct info
-{
+typedef struct info {
     int port;
     char *path;
     int cli_sock;

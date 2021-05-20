@@ -10,7 +10,6 @@
 
 void stop(void)
 {
-    
 }
 
 #endif /* !MAIN_H_ */

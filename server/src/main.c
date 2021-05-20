@@ -5,8 +5,8 @@
 ** main
 */
 
-#include "maccro.h"
 #include "definitions.h"
+#include "maccro.h"
 
 int usage()
 {
