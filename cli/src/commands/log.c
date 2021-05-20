@@ -32,6 +32,7 @@ int login(connection_t *connection, char *str)
         return (ERROR);
     if (uuid_parse(answer, connection->uuid) != 0)
         return (ERROR);
+    connection->connected = true;
     return (OK);
 }
 
