@@ -30,14 +30,14 @@ typedef struct info
     int serv_sock;
     struct sockaddr_in serv_addr;
     int curr_co;
-    fd_set __readfds;
+    fd_set _readfds;
     fd_set afds;
     char *buff;
     char **array;
     list_t *list;
 } info_t;
 
-int teams_server(int port);
+int teams_server(unsigned int port);
 int loop(info_t *info);
 void teams_cmd(info_t *info, int fd);
 

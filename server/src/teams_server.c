@@ -31,8 +31,8 @@ info_t *start(info_t *info)
         return NULL;
     }
     printf("-> %d\n", info->port);
-    FD_ZERO(&info->__readfds);
-    FD_SET(info->serv_sock, &info->__readfds);
+    FD_ZERO(&info->_readfds);
+    FD_SET(info->serv_sock, &info->_readfds);
     return info;
 }
 
@@ -48,7 +48,7 @@ info_t *init_struct(info_t *info, int port)
     return info;
 }
 
-int teams_server(int port)
+int teams_server(unsigned int port)
 {
     info_t *info = malloc(sizeof(*info));
     return loop(start(init_struct(info, port)));

@@ -6,6 +6,7 @@
 */
 
 #include "maccro.h"
+#include "definitions.h"
 
 int usage()
 {
@@ -18,10 +19,10 @@ int usage()
 int main(int argc, char **argv)
 {
     if (argc != 2)
-        return 84;
-    if (!strcmp(argv[1], HELP))
+        return (ERROR);
+    if (strcmp(argv[1], "-help") == 0)
         return usage();
-    return teams_server(atoi(argv[1]));
+    return teams_server(strtol(argv[1], NULL, 10));
 }
 
 #endif

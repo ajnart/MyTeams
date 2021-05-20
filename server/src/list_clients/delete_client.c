@@ -7,12 +7,12 @@
 
 #include "teams_server.h"
 
-void delete_client(list_t **list, int fd, fd_set *__readfds)
+void delete_client(list_t **list, int fd, fd_set *_readfds)
 {
     list_t *tmp = *list;
 
     close(fd);
-    FD_CLR(fd, __readfds);
+    FD_CLR(fd, _readfds);
     while (tmp != NULL && tmp->sockfd != fd) tmp = tmp->next;
     if (*list == NULL || tmp == NULL)
         return;
