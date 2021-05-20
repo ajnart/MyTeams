@@ -25,6 +25,8 @@ enum commands
     HELP,
     LOGIN,
     LOGOUT,
+    USER,
+    USERS
 };
 
 // Alligned for easier access to values

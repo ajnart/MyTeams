@@ -13,7 +13,7 @@
 #include "definitions.h"
 
 // TODO: Add all functions corresponding to commands here
-int (*pf[])(connection_t *connection, char *line) = {help, login, logout};
+int (*pf[])(connection_t *connection, char *line) = {help, login, logout, user, users};
 
 int run(connection_t *connection)
 {

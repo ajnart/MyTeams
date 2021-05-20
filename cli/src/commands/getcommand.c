@@ -17,7 +17,7 @@
 enum commands getcommand(const char *line)
 {
     enum commands result = NONE;
-    const char *commands[] = {"help", "login", "logout"};
+    const char *commands[] = {"help", "login", "logout", "user", "users"};
     char *rest = strdup(line);
 
     if (line == NULL || line[0] != '/')
