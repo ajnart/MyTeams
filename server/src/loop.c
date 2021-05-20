@@ -5,8 +5,9 @@
 ** loop
 */
 
-#include "teams_server.h"
+#include <sys/socket.h>
 #include "maccro.h"
+#include "teams_server.h"
 
 bool cmd(info_t *info, int fd)
 {

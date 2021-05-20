@@ -9,19 +9,19 @@
 
 void add_client(list_t **list, int fd)
 {
-    list_t *new = malloc(sizeof(*new));
+    list_t *create = malloc(sizeof(*create));
     list_t *tmp = *list;
 
-    new->next = NULL;
-    new->is_authenticated = false;
-    new->sockfd = fd;
+    create->next = NULL;
+    create->is_authenticated = false;
+    create->sockfd = fd;
     if (!*list) {
-        new->prev = NULL;
-        *list = new;
+        create->prev = NULL;
+        *list = create;
     }
     else {
         while (tmp->next) tmp = tmp->next;
-        tmp->next = new;
-        new->prev = tmp;
+        tmp->next = create;
+        create->prev = tmp;
     }
 }

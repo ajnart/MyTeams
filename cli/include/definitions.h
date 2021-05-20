@@ -11,6 +11,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <stdbool.h>
+#include <uuid/uuid.h>
 
 #define OK    0
 #define BLOCK 4096
@@ -29,6 +31,8 @@ enum commands
 typedef struct {
     int socket_fd;
     struct sockaddr_in server;
+    bool connected;
+    uuid_t uuid;
 
 } __attribute__((aligned(32))) connection_t;
 
