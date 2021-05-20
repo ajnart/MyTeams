@@ -15,7 +15,6 @@ char **str_to_word_array(char *str, char *delim)
 
     while(ptr != NULL) {
         array[i] = strdup(ptr);
-        printf("%s\n", array[i]);
         ptr = strtok(NULL, delim);
         i++;
     }

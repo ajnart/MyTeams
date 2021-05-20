@@ -25,6 +25,7 @@ bool get_client(info_t *info)
 {
     socklen_t addr_len = sizeof(info->cli_addr);
 
+    printf("someone's trying to connect\n");
     if ((info->cli_sock = accept(info->serv_sock, SOCK &info->cli_addr,
     &addr_len)) == -1)
         return false;
@@ -42,7 +43,7 @@ bool line_connect(int fd, info_t *info)
 int loop_fd(info_t *info)
 {
     for (int i = 0; i < FD_SETSIZE; ++i) {
-        if (FD_ISSET(i, &info->__readfds) && !line_connect(i, info))
+        if (FD_ISSET(i, &info->afds) && !line_connect(i, info))
             return false;
     }
     return true;
@@ -53,7 +54,8 @@ int loop(info_t *info)
     if (!info)
         return 84;
     while (true) {
-        if (select(FD_SETSIZE, &info->__readfds, NULL, NULL, NULL) == -1)
+        info->afds = info->__readfds;
+        if (select(FD_SETSIZE, &info->afds, NULL, NULL, NULL) == -1)
             break;
         if (!loop_fd(info))
             return 84;

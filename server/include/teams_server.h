@@ -31,6 +31,7 @@ typedef struct info
     struct sockaddr_in serv_addr;
     int curr_co;
     fd_set __readfds;
+    fd_set afds;
     char *buff;
     char **array;
     list_t *list;
