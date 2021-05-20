@@ -12,7 +12,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <stdbool.h>
-#include <uuid/uuid.h>
+#include <uuid.h>
 
 #define OK    0
 #define BLOCK 4096

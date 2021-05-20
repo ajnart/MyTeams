@@ -7,6 +7,8 @@
 
 NAME		= 	myteams_server
 
+CC = clang
+CXX = clang++
 
 SOURCE_DIR	= 	src
 
