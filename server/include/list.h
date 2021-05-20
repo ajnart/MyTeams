@@ -11,17 +11,19 @@
 #include <stdbool.h>
 #include <sys/select.h>
 #include <sys/socket.h>
+#include "definitions.h"
 
 typedef struct list {
     int sockfd;
     bool is_authenticated;
     char *login;
+    uuid_t uuid;
     struct list *next;
     struct list *prev;
 } list_t;
 
 void add_client(list_t **list, int fd);
-void delete_client(list_t **list, int fd, fd_set *__readfds);
+void delete_client(list_t **list, int fd, fd_set *_readfds);
 list_t *get_current_client(list_t **list, int fd);
 void print_client(list_t *list);
 

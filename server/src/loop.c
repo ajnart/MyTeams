@@ -55,14 +55,14 @@ bool loop_fd(info_t *info)
 int loop(info_t *info)
 {
     if (!info)
-        return 84;
+        return (ERROR);
     while (true) {
         info->afds = info->_readfds;
         if (select(FD_SETSIZE, &info->afds, NULL, NULL, NULL) == -1)
             break;
         if (!loop_fd(info))
-            return 84;
+            return (ERROR);
     }
     close(info->serv_sock);
-    return 0;
+    return (OK);
 }

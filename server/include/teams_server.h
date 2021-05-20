@@ -18,6 +18,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include "list.h"
+#include "definitions.h"
 
 typedef struct info {
     int port;
