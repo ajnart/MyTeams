@@ -5,67 +5,59 @@
 ** ftp
 */
 
-#include "teams_server.h"
-#include "maccro.h"
 #include "server.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <stdio.h>
 
-struct sockaddr_in *assign(info_t *info)
+static struct sockaddr_in *assign(int port)
 {
     struct sockaddr_in *addr = malloc(sizeof(*addr));
     if (!addr)
         return NULL;
     addr->sin_addr.s_addr = INADDR_ANY;
     addr->sin_family = AF_INET;
-    addr->sin_port = htons(info->port);
+    addr->sin_port = htons(port);
     return addr;
 }
 
-info_t *start(info_t *info)
+static server set_server(server new_server, int port)
 {
     struct sockaddr_in *addr;
-    if ((info->serv_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1
-        || (addr = assign(info)) == NULL || !info)
-        return NULL;
-    if (((bind(info->serv_sock, SOCK addr, sizeof(*addr))) == -1)
-        || (listen(info->serv_sock, 5) == -1)) {
-        close(info->serv_sock);
-        return NULL;
+
+    // set socket bind or listen to a port
+    if ((new_server.server_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1
+        || (addr = assign(port)) == NULL)
+        exit(84);
+    if (((bind(new_server.server_socket, (struct sockaddr *)addr, sizeof(*addr))) == -1)
+        || (listen(new_server.server_socket, MAX_CLIENTS) == -1)) {
+        close(new_server.server_socket);
+        perror("");
+        exit(84);
     }
-    printf("-> %d\n", info->port);
-    FD_ZERO(&info->_readfds);
-    FD_SET(info->serv_sock, &info->_readfds);
-    return info;
+    printf("$> %d\n", port);
+    FD_ZERO(&new_server.fd);
+    FD_SET(new_server.server_socket, &new_server.fd);
+    return (new_server);
 }
 
-info_t *init_struct(info_t *info, int port)
+static server init_server(long port)
 {
-    if (!info)
-        return NULL;
-    info->port = port;
-    info->cli_sock = 0;
-    memset(&info->cli_addr, 0, sizeof(info->cli_addr));
-    info->curr_co = 0;
-    info->buff = NULL;
-    return info;
-}
-
-static bool init_server(long port, server *new_server)
-{
+    server new_server;
     new_server.clients = malloc(sizeof(clients));
-    new_server.teams = malloc(sizeof(teams));
-    if (new_server->clients == NULL || new_server->teams == NULL)
-        return (false);
+    new_server.teams = malloc(sizeof(team));
+    if (new_server.clients == NULL || new_server.teams == NULL)
+        exit(84);
     new_server.server_socket = 0;
-    return (true);
+    new_server.connected = 0;
+    return (set_server(new_server, port));
 }
 
 int teams_server(unsigned int port)
 {
     // init struct server
-    server *server;
-    init_server(port, server);
-
-    return (OK);
-    // info_t *info = malloc(sizeof(*info));
-    // return loop(start(init_struct(info, port)));
+    server server = init_server(port);
+    //run server
+    return run(server);
 }

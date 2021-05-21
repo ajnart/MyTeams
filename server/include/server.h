@@ -17,6 +17,13 @@ typedef struct server {
     team *teams;
     fd_set fd;
     int server_socket;
+    unsigned int connected;
 } __attribute__((aligned(BITS))) server;
+
+
+int teams_server(unsigned int port);
+int run(server server);
+void teams_cmd(server *server, int fd, char *line);
+char **str_to_word_array(char *str, char *delim);
 
 #endif /* !SERVER_H_ */

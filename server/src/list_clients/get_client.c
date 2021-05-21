@@ -5,14 +5,15 @@
 ** get_client
 */
 
-#include "teams_server.h"
+#include "client.h"
+#include <stdlib.h>
 
-list_t *get_current_client(list_t **list, int fd)
+clients *get_current_client(clients **list, int fd)
 {
-    list_t *tmp = *list;
+    clients *tmp = *list;
 
     while (tmp) {
-        if (tmp->sockfd == fd)
+        if (tmp->socket_fd == fd)
             return tmp;
         tmp = tmp->next;
     }

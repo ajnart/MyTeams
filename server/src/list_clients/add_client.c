@@ -5,17 +5,19 @@
 ** add_client
 */
 
-#include "teams_server.h"
+#include "client.h"
+#include <stdlib.h>
 
-void add_client(list_t **list, int fd)
+void add_client(clients **list, int fd)
 {
-    list_t *create = malloc(sizeof(*create));
-    list_t *tmp = *list;
+    clients *create = malloc(sizeof(*create));
+    clients *tmp = *list;
 
     create->next = NULL;
-    create->is_authenticated = false;
-    create->login = NULL;
-    create->sockfd = fd;
+    create->connected = false;
+    create->name = NULL;
+    create->socket_fd = fd;
+    create->pms = malloc(sizeof(*create->pms));
     if (!*list) {
         create->prev = NULL;
         *list = create;

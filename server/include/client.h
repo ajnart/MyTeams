@@ -14,6 +14,7 @@
 
 typedef struct clients {
     struct clients *next;
+    struct clients *prev;
     struct pm *pms;
     int socket_fd;
     char *name;
@@ -28,5 +29,9 @@ typedef struct pm {
     char *message;
     time_t time;
 } __attribute__((aligned(BITS))) pm;
+
+void add_client(clients **list, int fd);
+void delete_client(clients **list, int fd);
+clients *get_current_client(clients **list, int fd);
 
 #endif /* !CLIENTS_H_ */

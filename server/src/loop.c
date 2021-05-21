@@ -6,63 +6,81 @@
 */
 
 #include <sys/socket.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include "definitions.h"
-#include "maccro.h"
-#include "teams_server.h"
+#include "server.h"
 
-bool cmd(info_t *info, int fd)
+static bool cmd(server *server, int fd)
 {
-    info->buff = get_next_line(fd);
-    if (info->buff == NULL) {
-        delete_client(&info->list, fd, &info->_readfds);
-        --info->curr_co;
+    size_t len = 0;
+    char *line = NULL;
+
+    getline(&line, &len, fdopen(fd, "r+"));
+    if (line == NULL) {
+        close(fd);
+        FD_CLR(fd, &server->fd);
+        delete_client(&server->clients, fd);
+        --server->connected;
     }
-    printf("socket number #%d said: %s\n", fd, info->buff);
-    teams_cmd(info, fd);
-    free(info->buff);
+    printf("socket number #%d said: %s\n", fd, line);
+    teams_cmd(server, fd, line);
+    free(line);
     return true;
 }
 
-bool get_client(info_t *info)
+static bool get_client(server *server)
 {
-    socklen_t addr_len = sizeof(info->cli_addr);
+    // accept client connection and stock it
+    struct sockaddr_in addr;
+    socklen_t addr_len = sizeof(addr);
+    memset(&addr, 0, addr_len);
+    int client_socket;
 
-    if ((info->cli_sock =
-                accept(info->serv_sock, SOCK & info->cli_addr, &addr_len))
-        == -1)
+    if ((client_socket = accept(server->server_socket,
+    (struct sockaddr *)&addr, &addr_len)) == -1)
         return false;
-    printf("New client connected on socket: %d\n", info->cli_sock);
-    add_client(&info->list, info->cli_sock);
-    ++info->curr_co;
-    FD_SET(info->cli_sock, &info->_readfds);
+    if (server->connected == MAX_CLIENTS) {
+        dprintf(client_socket, "Too many clients already connected\n");
+            return true;
+    }
+    ++server->connected;
+    printf("New client connected on socket: %d\n", client_socket);
+    add_client(&server->clients, client_socket);
+    FD_SET(client_socket, &server->fd);
     return true;
 }
 
-bool line_connect(int fd, info_t *info)
+static bool line_connect(int fd, server server)
 {
-    return (info->serv_sock == fd) ? get_client(info) : cmd(info, fd);
+    return (server.server_socket == fd) ? get_client(&server) : cmd(&server, fd);
 }
 
-bool loop_fd(info_t *info)
+static bool loop_fd(server server, fd_set tmp)
 {
+    // check fd
     for (int i = 0; i < FD_SETSIZE; ++i) {
-        if (FD_ISSET(i, &info->afds) && !line_connect(i, info))
+        if (FD_ISSET(i, &tmp) && !line_connect(i, server))
             return false;
     }
     return true;
 }
 
-int loop(info_t *info)
+int run(server server)
 {
-    if (!info)
-        return (ERROR);
-    while (true) {
-        info->afds = info->_readfds;
-        if (select(FD_SETSIZE, &info->afds, NULL, NULL, NULL) == -1)
+    fd_set tmp;
+
+    // loop run server
+    while (true)
+    {
+        tmp = server.fd;
+        if (select(FD_SETSIZE, &tmp, NULL, NULL, NULL) == -1)
             break;
-        if (!loop_fd(info))
+        if (!loop_fd(server, tmp))
             return (ERROR);
     }
-    close(info->serv_sock);
+    close(server.server_socket);
     return (OK);
 }

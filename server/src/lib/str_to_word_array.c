@@ -5,7 +5,10 @@
 ** str_to_word_array
 */
 
-#include "teams_server.h"
+#include "server.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 char **str_to_word_array(char *str, char *delim)
 {

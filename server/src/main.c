@@ -6,7 +6,10 @@
 */
 
 #include "definitions.h"
-#include "maccro.h"
+#include "server.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 int usage()
 {

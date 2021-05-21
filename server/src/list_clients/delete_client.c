@@ -5,15 +5,14 @@
 ** delete_client
 */
 
-#include "teams_server.h"
+#include "client.h"
+#include <stdlib.h>
 
-void delete_client(list_t **list, int fd, fd_set *_readfds)
+void delete_client(clients **list, int fd)
 {
-    list_t *tmp = *list;
+    clients *tmp = *list;
 
-    close(fd);
-    FD_CLR(fd, _readfds);
-    while (tmp != NULL && tmp->sockfd != fd)
+    while (tmp != NULL && tmp->socket_fd != fd)
         tmp = tmp->next;
     if (*list == NULL || tmp == NULL)
         return;

@@ -23,6 +23,10 @@
 #define MAX_BODY_LENGTH        512
 #define MAX_CLIENTS            32
 
+#define USAGE                                                        \
+    "USAGE: ./my_teams port\n\tport is the port number on wich the " \
+    "server socket listents\n"
+
 // Enum containing all the valid commands. To be used in the runner.
 enum commands
 {
