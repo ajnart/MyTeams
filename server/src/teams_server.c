@@ -7,6 +7,7 @@
 
 #include "teams_server.h"
 #include "maccro.h"
+#include "server.h"
 
 struct sockaddr_in *assign(info_t *info)
 {
@@ -48,8 +49,23 @@ info_t *init_struct(info_t *info, int port)
     return info;
 }
 
+static bool init_server(long port, server *new_server)
+{
+    new_server.clients = malloc(sizeof(clients));
+    new_server.teams = malloc(sizeof(teams));
+    if (new_server->clients == NULL || new_server->teams == NULL)
+        return (false);
+    new_server.server_socket = 0;
+    return (true);
+}
+
 int teams_server(unsigned int port)
 {
-    info_t *info = malloc(sizeof(*info));
-    return loop(start(init_struct(info, port)));
+    // init struct server
+    server *server;
+    init_server(port, server);
+
+    return (OK);
+    // info_t *info = malloc(sizeof(*info));
+    // return loop(start(init_struct(info, port)));
 }

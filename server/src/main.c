@@ -18,7 +18,7 @@ int usage()
 
 int main(int argc, char **argv)
 {
-    // 
+    // check error
     if (argc != 2)
         return (ERROR);
     if (strcmp(argv[1], "-help") == 0)
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
     long port = strtol(argv[1], NULL, 10);
     if (port < 0)
         return (ERROR);
+        // init teams server
     return teams_server(port);
 }
 
