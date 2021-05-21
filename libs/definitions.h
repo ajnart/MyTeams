@@ -17,6 +17,7 @@
 #define OK    0
 #define BLOCK 4096
 #define ERROR 84
+#define BITS  64
 
 // Enum containing all the valid commands. To be used in the runner.
 enum commands
