@@ -10,14 +10,18 @@
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
-#include <sys/socket.h>
 #include <stdbool.h>
+#include <sys/socket.h>
 #include <uuid/uuid.h>
 
-#define OK    0
-#define BLOCK 4096
-#define ERROR 84
-#define BITS  64
+#define OK                     0
+#define BLOCK                  4096
+#define ERROR                  84
+#define BITS                   64
+#define MAX_NAME_LENGTH        32
+#define MAX_DESCRIPTION_LENGTH 255
+#define MAX_BODY_LENGTH        512
+#define MAX_CLIENTS            32
 
 // Enum containing all the valid commands. To be used in the runner.
 enum commands
@@ -36,6 +40,6 @@ typedef struct {
     struct sockaddr_in server;
     bool connected;
     uuid_t uuid;
-} __attribute__((aligned(64))) connection_t;
+} __attribute__((aligned(BITS))) connection_t;
 
 #endif /* !DEFINITIONS_H_ */
