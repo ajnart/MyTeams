@@ -18,11 +18,15 @@ int usage()
 
 int main(int argc, char **argv)
 {
+    // 
     if (argc != 2)
         return (ERROR);
     if (strcmp(argv[1], "-help") == 0)
         return usage();
-    return teams_server(strtol(argv[1], NULL, 10));
+    long port = strtol(argv[1], NULL, 10);
+    if (port < 0)
+        return (ERROR);
+    return teams_server(port);
 }
 
 #endif
