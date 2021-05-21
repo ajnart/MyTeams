@@ -4,6 +4,7 @@ compile_commands.json
 .cache
 *.gc*
 *.vg*
+*.d
 build
 myteams_server
 myteams_cli
