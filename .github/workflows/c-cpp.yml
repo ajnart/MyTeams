@@ -23,7 +23,7 @@ jobs:
         run: make cli
 
   buildserver:
-  container: epitechcontent/epitest-docker:latest
+    container: epitechcontent/epitest-docker:latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
