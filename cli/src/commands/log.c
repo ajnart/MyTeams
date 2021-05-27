@@ -30,8 +30,8 @@ int login(connection_t *connection, char *str)
     send(connection->socket_fd, str, strlen(str), 0);
     if (read(connection->socket_fd, answer, BLOCK) <= 0)
         return (ERROR);
-    if (uuid_parse(answer, connection->uuid) != 0)
-        return (ERROR);
+    // if (uuid_parse(answer, connection->uuid) != 0)
+        // return (ERROR);
     connection->connected = true;
     return (OK);
 }
@@ -47,7 +47,7 @@ int logout(connection_t *connection, char *str)
     send(connection->socket_fd, answer, strlen(answer), 0);
     if (read(connection->socket_fd, answer, BLOCK) <= 0)
         return (ERROR);
-    uuid_clear(connection->uuid);
+    // uuid_clear(connection->uuid);
     connection->connected = false;
     return (OK);
 }

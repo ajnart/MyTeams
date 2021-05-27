@@ -34,4 +34,10 @@ void add_client(clients **list, int fd);
 void delete_client(clients **list, int fd);
 clients *get_current_client(clients **list, int fd);
 
+int user(char *line, clients *client);
+int users(char *line, clients *client);
+int help(char *line, clients *client);
+int logout(char *line, clients *client);
+int login(char *line, clients *client);
+
 #endif /* !CLIENTS_H_ */

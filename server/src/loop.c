@@ -18,7 +18,8 @@ static bool cmd(server *server, int fd)
     size_t len = 0;
     char *line = NULL;
 
-    getline(&line, &len, fdopen(fd, "r+"));
+    getline(&line, &len, fdopen(fd, "r"));
+
     if (line == NULL) {
         close(fd);
         FD_CLR(fd, &server->fd);
@@ -44,7 +45,7 @@ static bool get_client(server *server)
         return false;
     if (server->connected == MAX_CLIENTS) {
         dprintf(client_socket, "Too many clients already connected\n");
-            return true;
+        return true;
     }
     ++server->connected;
     printf("New client connected on socket: %d\n", client_socket);
@@ -81,6 +82,7 @@ int run(server server)
         if (!loop_fd(server, tmp))
             return (ERROR);
     }
+    printf("server close\n");
     close(server.server_socket);
     return (OK);
 }

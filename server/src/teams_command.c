@@ -5,24 +5,44 @@
 ** teams_command
 */
 
-#include <uuid/uuid.h>
+#include "definitions.h"
 #include "server.h"
+#include <uuid/uuid.h>
 #include "client.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-const char *commands[] = {"LOGIN", "EXIT"};
+int (*pf[])(char *, clients *) = {help, login, logout, user, users};
 
-int cmd_exit(char **cmd_line, clients *client)
+int user(char *line, clients *client)
 {
-    exit(0);
+    printf("%s\n", client->name);
+    dprintf(client->socket_fd, "%s\n", client->name);
+    return (OK);
 }
 
-int cmd_login(char **cmd_line, clients *client)
+int users(char *line, clients *client)
+{
+    //list_client(&client, client->socket_fd);
+    return (OK);
+}
+
+int help(char *line, clients *client)
+{
+    dprintf(client->socket_fd, USAGE);
+    return (OK);
+}
+
+int logout(char *line, clients *client)
+{
+    client->connected = false;
+}
+
+int login(char *line, clients *client)
 {
     char *answer = NULL;
-    client->name = strdup(cmd_line[1]);
+    client->name = strdup(line);
     client->connected = true;
     if (uuid_is_null(client->uuid))
         uuid_generate_time_safe(client->uuid);
@@ -32,30 +52,40 @@ int cmd_login(char **cmd_line, clients *client)
     return (OK);
 }
 
-void choose_cmd(clients *client, server *info, char **cmd_line)
+enum commands getcommand(const char *line)
 {
-    int (*fct[2])(char **, clients *) = {&cmd_login, &cmd_exit};
-    int i = 0;
-    for (i = 0; i < 0; i++) {
-        if (strcmp(cmd_line[0], commands[i]) == 0) {
-            fct[i](cmd_line, client);
-            break;
-        }
+    enum commands result = NONE;
+    const char *commands[] = {"help", "login", "logout", "user", "users"};
+    char *rest = strdup(line);
+
+    if (line == NULL || line[0] != '/')
+        return result;
+    const char *cmd = strtok_r(rest, " \n", &rest);
+    for (unsigned long i = 0; i < sizeof(commands) / 8; i++) {
+        if (strcmp(cmd + 1, commands[i]) == 0)
+            result = i; // I is set to the index of the command needed
     }
-    if (i == 2)
-        dprintf(client->socket_fd, "500 Unknown command.\n");
+    return result; // If nothing is found it will return NONE
 }
+
 
 void teams_cmd(server *server, int fd, char *line)
 {
+    int read = 0;
     clients *client = get_current_client(&server->clients, fd);
     char **cmd_line = str_to_word_array(line, " ");
     if (cmd_line)
         return;
+    enum commands command = NONE;
+    command = getcommand(line);
     if (client->connected == false
-        && strcmp(cmd_line[0], "LOGIN") != 0
-        && strcmp(cmd_line[0], "EXIT") != 0)
+        && command != LOGIN
+        && command != HELP
+        && command != LOGOUT)
         dprintf(client->socket_fd, "530 You must login\n");
-    else
-        choose_cmd(client, server, cmd_line);
+    else {
+        if (command != NONE)
+            read = pf[command](cmd_line[1], client);
+    }
+        
 }
