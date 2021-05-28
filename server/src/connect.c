@@ -37,8 +37,6 @@ static server set_server(server new_server, int port)
         exit(84);
     }
     printf("$> %d\n", port);
-    FD_ZERO(&new_server.fd);
-    FD_SET(new_server.server_socket, &new_server.fd);
     return (new_server);
 }
 

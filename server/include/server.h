@@ -20,7 +20,7 @@ typedef struct server {
     unsigned int connected;
 } __attribute__((aligned(BITS))) server;
 
-
+char *get_next_line(const int fd);
 int teams_server(unsigned int port);
 int run(server server);
 void teams_cmd(server *server, int fd, char *line);
