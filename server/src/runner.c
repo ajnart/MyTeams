@@ -25,41 +25,50 @@ static void sig_handler()
 
 static void start(char *line, clients *client)
 {
-    char **cmd = str_to_word_array(line, ' ');
-    free(line);
 }
 
-static bool get_cmd(clients *client)
+static bool get_cmd(clients *client, server *server)
 {
     char *line = get_next_line(client->socket_fd);
-    if (line == NULL)
+    dprintf(server->server_socket, "%s\n", line);
+    if (line == NULL) {
+        delete_client(&server->clients, client->socket_fd);
         return false;
-    start(line, client);
+    }
+    free(line);
+    // start(line, client);
     return true;
 }
 
-static void msg_client(server *server)
+void loop(clients **list, server *server)
 {
-    clients *tmp = &server->clients;
+    clients *tmp = *list;
 
     while (tmp->next) {
         if (FD_ISSET(tmp->socket_fd, &server->fd)) {
-            get_cmd(tmp);
+            get_cmd(tmp, server);
         }
         tmp = tmp->next;
     }
 
 }
 
+static void msg_client(server *server)
+{
+    loop(&server->clients, server);
+}
+
 static void accept_client(server *server)
 {
     int new_client = 0;
     struct sockaddr_in addr = {0};
+    int size = sizeof(addr);
 
     if (FD_ISSET(server->server_socket, &server->fd)) {
         if ((new_client = accept(server->server_socket,
-        (struct sockaddr *)&addr, (socklen_t *)(sizeof(&addr)))) == -1)
+        (struct sockaddr *)&addr, (socklen_t *)&size)) == -1)
             exit(84);
+        printf("New client connected on socket: %d\n", new_client);
         if (server->connected == MAX_CLIENTS) // check full
             return;
         add_client(&server->clients, new_client); // add to list
@@ -86,6 +95,7 @@ int run(server server)
     {
         select_client(&server);
         accept_client(&server);
+        printf("salut\n");
         msg_client(&server);
     }
     printf("server close\n");
