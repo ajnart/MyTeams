@@ -17,7 +17,6 @@ int (*pf[])(char *, clients *) = {help, login, logout, user, users};
 
 int user(char *line, clients *client)
 {
-    printf("%s\n", client->name);
     dprintf(client->socket_fd, "%s\n", client->name);
     return (OK);
 }
@@ -69,10 +68,9 @@ enum commands getcommand(const char *line)
 }
 
 
-void teams_cmd(server *server, int fd, char *line)
+void teams_cmd(server *server, clients *client, char *line)
 {
     int read = 0;
-    clients *client = get_current_client(&server->clients, fd);
     char **cmd_line = str_to_word_array(line, " ");
     if (cmd_line)
         return;

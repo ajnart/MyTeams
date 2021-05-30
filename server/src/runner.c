@@ -23,10 +23,6 @@ static void sig_handler()
     keep_running = false;
 }
 
-static void start(char *line, clients *client)
-{
-}
-
 static bool get_cmd(clients *client, server *server)
 {
     char *line = get_next_line(client->socket_fd);
@@ -35,8 +31,8 @@ static bool get_cmd(clients *client, server *server)
         delete_client(&server->clients, client->socket_fd);
         return false;
     }
+    teams_cmd(server, client, line);
     free(line);
-    // start(line, client);
     return true;
 }
 
@@ -95,7 +91,6 @@ int run(server server)
     {
         select_client(&server);
         accept_client(&server);
-        printf("salut\n");
         msg_client(&server);
     }
     printf("server close\n");
