@@ -8,7 +8,7 @@
 #include "client.h"
 #include <stdlib.h>
 
-void add_client(clients **list, int fd)
+void add_client(clients **list, unsigned int fd)
 {
     clients *create = malloc(sizeof(*create));
     clients *tmp = *list;

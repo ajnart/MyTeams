@@ -5,22 +5,21 @@
 ** loop
 */
 
-#include <sys/socket.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <signal.h>
 #include <errno.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
 #include "definitions.h"
 #include "server.h"
 
-static volatile int keep_running = true;
-
+static volatile int running = true;
 
 static void sig_handler()
 {
-    keep_running = false;
+    running = false;
 }
 
 static bool get_cmd(clients *client, server *server)
@@ -36,7 +35,7 @@ static bool get_cmd(clients *client, server *server)
     return true;
 }
 
-void loop(clients **list, server *server)
+void get_command_from_clients(clients **list, server *server)
 {
     clients *tmp = *list;
 
@@ -46,30 +45,32 @@ void loop(clients **list, server *server)
         }
         tmp = tmp->next;
     }
-
 }
 
-static void msg_client(server *server)
+static int handle_commands_from_clients(server *server)
 {
-    loop(&server->clients, server);
+    get_command_from_clients(&server->clients, server);
+    return (OK);
 }
 
-static void accept_client(server *server)
+int accept_client(server *server)
 {
-    int new_client = 0;
+    unsigned int new_client = 0;
     struct sockaddr_in addr = {0};
-    int size = sizeof(addr);
+    unsigned int size = sizeof(addr);
 
     if (FD_ISSET(server->server_socket, &server->fd)) {
         if ((new_client = accept(server->server_socket,
-        (struct sockaddr *)&addr, (socklen_t *)&size)) == -1)
-            exit(84);
+                 (struct sockaddr *) &addr, (socklen_t *) &size))
+            == -1)
+            return (ERROR);
+        if (server->connected >= MAX_CLIENTS) // check full
+            return (ERROR);
         printf("New client connected on socket: %d\n", new_client);
-        if (server->connected == MAX_CLIENTS) // check full
-            return;
         add_client(&server->clients, new_client); // add to list
         ++server->connected;
     }
+    return (OK);
 }
 
 static bool select_client(server *server)
@@ -85,15 +86,14 @@ static bool select_client(server *server)
 
 int run(server server)
 {
-    // loop run server
     signal(SIGINT, sig_handler);
-    while (keep_running)
-    {
-        select_client(&server);
-        accept_client(&server);
-        msg_client(&server);
+    while (running) {
+        if (select_client(&server) != OK
+            || accept_client(&server) != OK
+            || handle_commands_from_clients(&server) != OK)
+            return (ERROR);
     }
-    printf("server close\n");
+    printf("Server is closimg...\n");
     close(server.server_socket);
     return (OK);
 }

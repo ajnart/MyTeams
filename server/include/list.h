@@ -22,7 +22,7 @@ typedef struct list {
     struct list *prev;
 } list_t;
 
-void add_client(list_t **list, int fd);
+void add_client(list_t **list, unsigned int fd);
 void delete_client(list_t **list, int fd, fd_set *_readfds);
 list_t *get_current_client(list_t **list, int fd);
 void print_client(list_t *list);

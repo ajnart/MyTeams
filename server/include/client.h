@@ -30,11 +30,6 @@ typedef struct pm {
     time_t time;
 } __attribute__((aligned(BITS))) pm;
 
-void add_client(clients **list, int fd);
-void delete_client(clients **list, int fd);
-clients *get_current_client(clients **list, int fd);
-void setfd_client(clients **list, fd_set fd);
-
 int user(char *line, clients *client);
 int users(char *line, clients *client);
 int help(char *line, clients *client);

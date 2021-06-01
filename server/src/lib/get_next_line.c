@@ -46,8 +46,8 @@ static char *init_buffer(char *buffer, const int fd)
 
 char *get_next_line(const int fd)
 {
-    char *str;
-    int nb;
+    char *str = NULL;
+    unsigned int nb = 0;
     char *buffer = init_buffer(buffer, fd);
 
     if (buffer == NULL || !buffer[0])
